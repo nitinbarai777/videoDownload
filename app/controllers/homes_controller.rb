@@ -1,43 +1,33 @@
 class HomesController < ApplicationController
   require 'viddl-rb'
   require 'open-uri'
+  require 'fileutils'
 
   def index
-    # youtube
-    # vimeo.com
-    # yandex.video
-
-    # https://www.youtube.com/watch?v=Dqzsu6PmkTw
-    # https://www.youtube.com/watch?v=gvdf5n-zI14
-    # https://www.youtube.com/watch?v=EEX_XM6SxmY
-
-    # https://vimeo.com/206024794"
-    # dailymotion.com
-    # http://www.dailymotion.com/video/x5e553p_young-iraqis-volunteer-to-fix-potholes_news
-    
-    # path_to_video = Rails.root.join('data', 'some-video.mp4')
- 
-    # Dir.open("public/").each do |p|
-    # p = File.split('.')
-    # raise p.inspect
-    # next if File.extname(p) != ".mp4"
-    # filename = File.basename(p, File.extname(p))
-    # newname = filename.upcase + File.extname(p)  
-    # FileUtils.mv("#{path}/#{p}", "#{path}/#{newname}")
-    # end
+  
     if params[:videoUrl].present?
-      video_info = YoutubeDL.download "#{params[:videoUrl]}", output: 'public/video.mp4'
-      
-      video_file_title = video_info.information[:title]  
-      
-      path_to_video = Rails.root.join('public', 'video.mp4')
-      send_file path_to_video, :range => true, :type => 'video/mp4'
-    end
+      begin 
+        video_info = YoutubeDL.download "#{params[:videoUrl]}", output: '~/Video/test.mp4'
+        video_file_title = video_info.information[:title]
+        @video_url = video_info.information[:url]
 
-    # path_to_video = Rails.root.join('public', 'some_file.mp4')
-    # send_file path_to_video, :range => true, :type => 'video/mp4'
-      # https://www.youtube.com/watch?v=gvdf5n-zI14
-      # raise path_to_video.inspect
-      # c = YoutubeDL.download "https://www.youtube.com/watch?v=EEX_XM6SxmY", output: 'public/some_file.mp4'
+       data = open(@video_url) 
+       send_data data.read, filename: "#{video_file_title}", disposition: 'attachment', stream: 'true', buffer_size: '4096' 
+
+
+        # respond_to do |format|
+        #   @url = "/ajax_download?file=#{video_file_title}"
+        #   format.js {render :partial => "downloadFile"}
+      rescue Exception => e
+      end
+    end
   end
+
+  # def ajax_download
+  #   # path_to_video = Rails.root.join('public', 'video.mp4')
+  #    folder = system 'realpath ~/Video'
+  #    p path_to_video1
+  #   send_file path_to_video1,:filename =>  "#{params[:file]}", :range => true, :type => 'video/mp4'
+  #   # File.delete(path_to_video);
+  # end
 end
