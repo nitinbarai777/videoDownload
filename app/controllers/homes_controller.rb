@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+  class HomesController < ApplicationController
   require 'viddl-rb'
   require 'open-uri'
   require 'fileutils'
@@ -6,20 +6,21 @@ class HomesController < ApplicationController
   def index
   
     if params[:videoUrl].present?
-      begin 
-        video_info = YoutubeDL.download "#{params[:videoUrl]}", output: '~/Video/test.mp4'
-        video_file_title = video_info.information[:title]
-        @video_url = video_info.information[:url]
+      # begin 
+      video_info = YoutubeDL.download "#{params[:videoUrl]}"
+      # video_file_title = video_info.information[:requested_formats].first[:url] 
+      video_file_title = video_info.information[:title] 
+      @video_url = video_info.information[:url] || video_info.information[:requested_formats].first[:url]
 
-       data = open(@video_url) 
-       send_data data.read, filename: "#{video_file_title}", disposition: 'attachment', stream: 'true', buffer_size: '4096' 
+      data = open(@video_url) 
+      send_data data.read, filename: "#{video_file_title}", disposition: 'attachment', stream: 'true', buffer_size: '4096' 
 
 
         # respond_to do |format|
         #   @url = "/ajax_download?file=#{video_file_title}"
         #   format.js {render :partial => "downloadFile"}
-      rescue Exception => e
-      end
+      # rescue Exception => e
+      # end
     end
   end
 
