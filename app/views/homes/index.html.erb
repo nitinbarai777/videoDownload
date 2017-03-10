@@ -1,22 +1,22 @@
 <div class="loader loder-hide"></div>
-<div class="video-form">  
-  <%= form_tag('',{:method => :get,id: 'videoform'}) do %>
-    <%= text_field_tag "videoUrl", nil, :placeholder => "  Insert Link" %>
-    <%= button_tag "Load Video",id: 'loadVideo',class: 'btn-load'%>
-    <%= button_tag "Download",id: 'download',class: 'btn-download' %>
-    
-    <div id="videoFrame" style="display: none">
-      <iframe width="650" height="415" src="" id="loadFrame">
-      </iframe>
-    </div>
-  <% end %>
-</div>
+  <div class="video-form">
+    <%= form_tag('',{:method => :get,id: 'videoform'}) do %>
+      <%= text_field_tag "videoUrl", nil, :placeholder => "  Insert Link" %>
+      <%= button_tag "Load Video",id: 'loadVideo',class: 'btn-load'%>
+      <%= button_tag "Download",id: 'download',class: 'btn-download' %>
+
+      <div id="videoFrame" style="display: none">
+        <iframe width="650" height="415" src="" id="loadFrame">
+        </iframe>
+      </div>
+    <% end %>
+  </div>
 
 <script type="text/javascript">
   $("#loadVideo").click(function(e){
     url = $("#videoUrl").val()
     loadVideo(url)
-    e.preventDefault();  
+    e.preventDefault();
   })
 
   function loadVideo(url){
@@ -25,25 +25,17 @@
       videoId = url.split("=").pop()
       document.getElementById("loadFrame").src = "https://www.youtube.com/embed/"+ videoId;
     }else if(url.split('/')[2] == "vimeo.com"){
-      // https://vimeo.com/206024794
       videoId = url.split("/").pop()
       document.getElementById("loadFrame").src = "https://player.vimeo.com/video/"+ videoId;
-    }else{ 
+    }else {
       document.getElementById("loadFrame").src = url
     }
     $("#videoFrame").show();
   }
 
-    $(document).ajaxStart(function() {
-      $(".loder-hide").show();
-    }).ajaxStop(function() {
-      $(".loder-hide").hide();
-      
-    })
-    $(document).ready(function(){
-      $('#videoform').on('ajax:error',function(e, xhr, status, error){
-        console.log(xhr);
-      })
-    });
-
+  $(document).ajaxStart(function() {
+    $(".loder-hide").show();
+  }).ajaxStop(function() {
+    $(".loder-hide").hide();
+  })
 </script>
