@@ -7,7 +7,7 @@
   
     if params[:videoUrl].present?
       begin 
-        video_info = YoutubeDL.download "#{params[:videoUrl]}", output: '~video/test.mp4'
+        video_info = YoutubeDL.download "#{params[:videoUrl]}"
         # video_file_title = video_info.information[:requested_formats].first[:url] 
         video_file_title = video_info.information[:title] 
         @video_url = video_info.information[:url] || video_info.information[:requested_formats].first[:url]
