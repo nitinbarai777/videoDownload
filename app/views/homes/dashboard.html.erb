@@ -70,6 +70,7 @@
                 <button id="vidcanc" type="submit" name="cancelbtn" class="btn btn-danger" style="display: none;">Cancel</button>
                 <img src="/assets/download-bar.gif" id="downloadbar" style="padding: 10px; display: none;">
                 <%= button_tag "Download",id: 'download',class: 'btn btn-primary',style: "display: none" %>
+                <%= button_tag "Done",id: 'done',type: 'button',class: 'btn btn-primary',style: "display: none" %>
 
                 <button id="vidcont" type="button" name="continuebtn" class="btn btn-primary">Continue</button>
                 <!-- <img src="/assets/ajax-loader.gif" id="spinner1" style="width: 10%; display: none;"> -->
@@ -147,6 +148,7 @@
     url = $("#url").val()
     $("#vidcont").hide();
     $("#download").show();
+     $("#done").show();
     loadVideo(url)
     e.preventDefault();
   })
@@ -170,5 +172,12 @@
   }).ajaxStop(function() {
     $(".loder-hide").hide();
   })
+  $("#done").on('click',function(){
+    $("#url").val("")
+    $("#videoFrame").hide()
+    $("#vidcont").show();
+    $("#download").hide();
+    $("#done").hide();
+  });
 
 </script>
