@@ -14,6 +14,7 @@ gem 'rails', '~> 5.0.1'
 gem 'puma', '~> 3.0'
 gem 'viddl-rb'
 gem 'youtube-dl.rb'
+
 gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'send_file_with_range'

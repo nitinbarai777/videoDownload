@@ -19,7 +19,7 @@ class HomesController < ApplicationController
         data = open(video_file)
         send_data data.read, filename: "#{video_title}", disposition: 'attachment', stream: 'true', buffer_size: '4096'
       rescue Exception => e
-     end
+      end
     end
   end
 end
