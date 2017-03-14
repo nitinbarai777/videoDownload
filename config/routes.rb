@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to=> 'homes#index'
+  root :to=> 'homes#dashboard'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/ajax_download',to: "homes#ajax_download"
+  match '/' => 'homes#dashboard', :via => [:get, :post]
 end

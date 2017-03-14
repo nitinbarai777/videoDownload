@@ -1,0 +1,174 @@
+<div class="main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+        <%= form_tag(root_path) do %>
+            <div class="row control-group">         
+              <a href="#">
+              <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-download fa-stack-1x fa-inverse"></i>
+              </span> <strong>Download</strong></a>                   
+            </div>
+
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Download</label>
+                <%= text_field_tag "url", nil, :placeholder => "Link to video", class: "form-control" %>
+                
+                <span class="help-block text-danger" id="invalidurl" style="display: none;">Invalid URL. Try again!</span>
+              </div>
+            </div>
+
+            <div class="row control-group" id="checkboxdiv" style="display: none;">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="checkbx" name="audio"> Audio Only
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <h3 id="vidtitle" style="display: none;">Video title</h3>
+            <div class="row control-group" id="vidthumb" style="display: none;">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <img src="" id="vidimg" alt="Invalid link. Try again!" style="max-width: 360px; max-height: 300px; padding: 0px; border: 1px solid #1c1c1c;">
+              </div>
+            </div>
+
+            <div class="row control-group" id="vidthumb" style="">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <div id="videoFrame" style="display: none">
+                  <iframe width="650" height="415" src="" id="loadFrame">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="row control-group" id="formatbtns" style="display: none;">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label id="formatlbl" class="radiobutton" style="display: none; font-size: 16px">Format:</label>
+                <div id="mp4" class="radiobutton" style="display: none;"><input type="radio" name="format" value="mp4" checked=""> mp4 </div>
+                <div id="3gp" class="radiobutton" style="display: none;"><input type="radio" name="format" value="3gp"> 3gp </div>
+                <div id="aac" class="radiobutton" style="display: none;"><input type="radio" name="format" value="aac"> aac </div>
+                <div id="flv" class="radiobutton" style="display: none;"><input type="radio" name="format" value="flv"> flv </div>
+                <div id="m4a" class="radiobutton" style="display: none;"><input type="radio" name="format" value="m4a"> m4a </div>
+                <div id="ogg" class="radiobutton" style="display: none;"><input type="radio" name="format" value="ogg"> ogg </div>
+                <div id="wav" class="radiobutton" style="display: none;"><input type="radio" name="format" value="wav"> wav </div>
+                <div id="webm" class="radiobutton" style="display: none;"><input type="radio" name="format" value="webm"> webm  </div>
+                <div id="mp3" class="radiobutton" style="display: none;"><input type="radio" name="format" value="mp3"> mp3 </div>
+              </div>
+            </div> -->
+            <br>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <a href="" id="vidlink" target="_blank" class="btn btn-primary" style="display: none;" download="">Save!</a>
+                <button id="vidrestart" type="submit" name="restartbtn" class="btn btn-primary" style="display: none;">Done</button>
+                <h4 id="downloadready" style="display: none; padding: 2px;">Download ready!</h4>
+                <button id="viddown" type="submit" name="downloadbtn" class="btn btn-primary" style="display: none;">Download</button>
+                <button id="vidcanc" type="submit" name="cancelbtn" class="btn btn-danger" style="display: none;">Cancel</button>
+                <img src="/assets/download-bar.gif" id="downloadbar" style="padding: 10px; display: none;">
+                <%= button_tag "Download",id: 'download',class: 'btn btn-primary',style: "display: none" %>
+
+                <button id="vidcont" type="button" name="continuebtn" class="btn btn-primary">Continue</button>
+                <!-- <img src="/assets/ajax-loader.gif" id="spinner1" style="width: 10%; display: none;"> -->
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <hr>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="#">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
+          </span> <strong>Supported Sites</strong></a>        
+          <p>
+            </p><ul class="list-group">
+            <li class="list-group-item">
+              <a href="#">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
+              </span>
+              youtube.com</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#">
+              <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+              </span>
+              dailymotion.com</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#">
+              <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>             
+              facebook.com</a>
+            </li>
+            <li class="list-group-item">
+              <a href="#">
+              <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+              instagram.com</a>
+            </li>                       
+            </ul>
+          <p></p>
+          <a href="#">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
+          </span> <strong>About US</strong></a>
+          <p>
+            VideoDownload Video Downloader is a free web application that allows you to download videos from sites like YouTube, Facebook, Twitch.Tv, Vimeo, Dailymotion and many more.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<hr>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#url").focus();
+  });
+
+  $("#vidcont").click(function(e){
+    url = $("#url").val()
+    $("#vidcont").hide();
+    $("#download").show();
+    loadVideo(url)
+    e.preventDefault();
+  })
+
+  function loadVideo(url){
+    console.log(url.split('/')[2]);
+    if (url.split('/')[2] == "www.youtube.com"){
+      videoId = url.split("=").pop()
+      document.getElementById("loadFrame").src = "https://www.youtube.com/embed/"+ videoId;
+    }else if(url.split('/')[2] == "vimeo.com"){
+      videoId = url.split("/").pop()
+      document.getElementById("loadFrame").src = "https://player.vimeo.com/video/"+ videoId;
+    }else {
+      document.getElementById("loadFrame").src = url
+    }
+    $("#videoFrame").show();
+  }
+
+  $(document).ajaxStart(function() {
+    $(".loder-hide").show();
+  }).ajaxStop(function() {
+    $(".loder-hide").hide();
+  })
+
+</script>
